@@ -191,12 +191,42 @@ function addCategory(category) {
 
     const subjectTitle = document.createElement('div')
     subjectTitle.classList.add('subject-title')
-    subjectTitle.innerText = category.subject
+    subjectTitle.innerHMTL = category.subject
 
     column.appendChild(subjectTitle)
     game.append(column)
 
+    category.questions.forEach(question => { /* if it doesn't work then check if should be question instead */
+        const card = document.createElement('div')
+        card.classList.add('card')
+        column.append(card)
+
+    if (question.scoreLevel === 'easy') {
+        card.innerHTML = 100
+    }
+    if (question.scoreLevel === 'medium') {
+        card.innerHTML = 200
+    }
+    if (question.scoreLevel === 'hard') {
+        card.innerHTML = 300
+    }
+
+    card.setAttribute('data-question', question.question)
+    card.setAttribute('data-answer-1', question.answers[0]) 
+    card.setAttribute('data-answer-2', question.answers[1]) 
+    card.setAttribute('data-answer-3', question.answers[2]) 
+    card.setAttribute('data-correct', question.correct)
+    card.setAttribute('data-value', card.getInnerHTML())
+
+    card.addEventListener('click', flipCard) /* hid all boxes apart from one. Check back here if encountering errors */
+    })
+
+function flipCard() {
+    con
+
 }
 
-questionCatergories.forEach(category => addCategory(category))
+}
+
+questionCatergories.forEach(category => addCategory(category)) /* loop */
 
