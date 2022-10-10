@@ -24,7 +24,7 @@ const questionCatergories = [
                 scoreLevel: 'medium',
             },
             {
-                question: 'What is HMTL syntax is used at top of the page?',
+                question: 'What is HTML syntax is used at top of the page?',
                 answers: ['<!DOCTYPE html>', '<html lang="en">', '<head>'],
                 correct: '<!DOCTYPE html>',
                 scoreLevel: 'medium',
@@ -109,80 +109,6 @@ const questionCatergories = [
     },
 ]
 
-/* Consider expanding for cover additional sections 
-    {
-        subject: 'GitHub',
-        questions: [
-            {
-                question: '',
-                answers: ['', '', ''],
-                correct: '',
-                scoreLevel: 'easy'
-            },
-            {
-                question: '',
-                answers: ['', '', ''],
-                correct: '',
-                scoreLevel: 'easy'
-            },
-            {
-                question: '',
-                answers: ['', '', ''],
-                correct: '',
-                scoreLevel: 'medium'
-            },
-            {
-                question: '',
-                answers: ['', '', ''],
-                correct: '',
-                scoreLevel: 'medium'
-            },
-            {
-                question: '',
-                answers: ['', '', ''],
-                correct: '',
-                scoreLevel: 'hard'
-            },
-        ]
-    },
-    {
-        subject: 'WebDev',
-        questions: [
-            {
-                question: '',
-                answers: ['', '', ''],
-                correct: '',
-                scoreLevel: 'easy'
-            },
-            {
-                question: '',
-                answers: ['', '', ''],
-                correct: '',
-                scoreLevel: 'easy'
-            },
-            {
-                question: '',
-                answers: ['', '', ''],
-                correct: '',
-                scoreLevel: 'medium'
-            },
-            {
-                question: '',
-                answers: ['', '', ''],
-                correct: '',
-                scoreLevel: 'medium'
-            },
-            {
-                question: '',
-                answers: ['', '', ''],
-                correct: '',
-                scoreLevel: 'hard'
-            },
-        ] 
-    }, */
-
-
-
 /* define columns of subjects here --- loops in loops */
 function addCategory(category) {
     /* define column title --- subject */
@@ -191,7 +117,7 @@ function addCategory(category) {
 
     const subjectTitle = document.createElement('div')
     subjectTitle.classList.add('subject-title')
-    subjectTitle.innerHMTL = category.subject
+    subjectTitle.innerHTML = category.subject
 
     column.appendChild(subjectTitle)
     game.append(column)
@@ -220,13 +146,43 @@ function addCategory(category) {
 
     card.addEventListener('click', flipCard) /* hid all boxes apart from one. Check back here if encountering errors */
     })
-
-
-function flipCard() {
-    con
-
 }
 
+function flipCard() {
+    this.innerHTML = ""
+    this.style.fontSize = "15px" //Consider changing to rem value
+    this.style.lineHeight = "30px" //Consider changing to rem value
+
+    const textDisplay = document.createElement('div')
+    textDisplay.classList.add('card-text')
+    textDisplay.innerHTML = this.getAttribute('data-question')
+
+    const firstButton = document.createElement('button')
+    const secondButton = document.createElement('button')
+    const thirdButton = document.createElement('button')
+
+    firstButton.classList.add('first-button')
+    secondButton.classList.add('second-button')
+    thirdButton.classList.add('third-button')
+
+    firstButton.innerHTML = this.getAttribute('data-answer-1')
+    secondButton.innerHTML = this.getAttribute('data-answer-2')
+    thirdButton.innerHTML = this.getAttribute('data-answer-3')
+
+    firstButton.addEventListener('click', getResult)
+    secondButton.addEventListener('click', getResult)
+    thirdButton.addEventListener('click', getResult)
+
+    this.append(textDisplay, firstButton, secondButton, thirdButton)
+
+    const allCards = Array.from( document.querySelectorAll('.card'))
+    allCards.forEach(card => card.removeEventListener('click', flipCard))
+}
+
+function getResult() {
+    const cardOfButton = this.parentElement
+
+    console.log('cardOfButton', cardOfButton)
 }
 
 questionCatergories.forEach(category => addCategory(category)) /* loop */
