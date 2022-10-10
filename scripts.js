@@ -65,7 +65,7 @@ const questionCatergories = [
                 scoreLevel: 'medium',
             },
             {
-                question: '',
+                question: 'What is the CSS syntax for typing a comment?',
                 answers: ['/* comment */', '// comment //', '**comment**'],
                 correct: '/* comment */',
                 scoreLevel: 'hard',
@@ -89,7 +89,7 @@ const questionCatergories = [
             },
             {
                 question: 'Which one of these is NOT a standard variable?',
-                answers: ['event', 'const', 'var'],
+                answers: ['event', 'const', 'let'],
                 correct: 'event',
                 scoreLevel: 'medium',
             },
@@ -220,6 +220,7 @@ function addCategory(category) {
 
     card.addEventListener('click', flipCard) /* hid all boxes apart from one. Check back here if encountering errors */
     })
+
 
 function flipCard() {
     con
